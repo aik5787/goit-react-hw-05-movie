@@ -13,23 +13,19 @@ import {
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movieRequest, setMovieRequest] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
-    const query = searchParams.get('query');
-    if (query) {
-      setSearchParams({ query: query });
-      // getMovieRequest(query);
+    if (searchParams.get('query')) {
+      setSearchText(searchParams.get('query'));
+      getMovieRequest(searchParams.get('query'));
     }
-  }, [searchParams, setSearchParams]);
+  }, [searchParams]);
 
   const handleChange = e => {
     const inputValue = e.target.value;
-    if (!inputValue.trim()) {
-      setSearchParams({ query: '' });
-      localStorage.removeItem('searchQuery');
-    } else {
-      setSearchParams({ query: inputValue });
-      localStorage.setItem('searchQuery', inputValue);
+    if (inputValue.trim()) {
+      setSearchText(inputValue);
     }
   };
 
@@ -43,9 +39,11 @@ const Movies = () => {
   };
 
   const handleSearch = e => {
-    const query = searchParams.get('query');
-
-    getMovieRequest(query);
+    const query = searchText;
+    if (query) {
+      getMovieRequest(query);
+      setSearchParams({ query: query });
+    }
   };
   //   console.log(movieRequest);
 
@@ -62,7 +60,7 @@ const Movies = () => {
       <MoviesInput
         type="text"
         placeholder="Enter a movie name"
-        value={searchParams.get('query') || ''}
+        value={searchText}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
