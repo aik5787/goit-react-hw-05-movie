@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './Layout/Layout';
 
 const HomePage = lazy(() => import('./Pages/HomePage/HomePage'));
@@ -25,6 +25,10 @@ const App = () => {
         </Route>
         <Route path="movies" element={<Movies />}></Route>
       </Route>
+      <Route
+        path="*"
+        element={<Navigate to="/goit-react-hw-05-movie/" replace />}
+      />
     </Routes>
   );
 };

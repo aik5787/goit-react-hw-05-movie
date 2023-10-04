@@ -26,6 +26,7 @@ const MoviesDetails = () => {
         const dataMovieDetail = await fetchMovieDetails(movieId);
         setMovieDetails(dataMovieDetail);
       } catch (error) {
+        window.location.href = '/goit-react-hw-05-movie/';
         console.error('Error fetching movie details:', error);
       }
     };
@@ -62,7 +63,7 @@ const MoviesDetails = () => {
           </MovieInfoContainer>
         </MovieDetailsContainer>
       ) : (
-        <p>Loading...</p>
+        <p>Something wrong...</p>
       )}
       <MovieAddInfoContainer>
         <MovieAddInfo>Additional information</MovieAddInfo>

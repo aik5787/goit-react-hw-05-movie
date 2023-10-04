@@ -18,7 +18,7 @@ const Movies = () => {
     const query = searchParams.get('query');
     if (query) {
       setSearchParams({ query: query });
-      getMovieRequest(query);
+      // getMovieRequest(query);
     }
   }, [searchParams, setSearchParams]);
 
@@ -26,8 +26,10 @@ const Movies = () => {
     const inputValue = e.target.value;
     if (!inputValue.trim()) {
       setSearchParams({ query: '' });
+      localStorage.removeItem('searchQuery');
     } else {
       setSearchParams({ query: inputValue });
+      localStorage.setItem('searchQuery', inputValue);
     }
   };
 
