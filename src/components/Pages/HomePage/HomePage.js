@@ -29,7 +29,7 @@ const HomePage = () => {
       <HomePageList>
         {movies.map(movie => (
           <li key={movie.id}>
-            <StyledNavLink to={`/movies/${movie.id}`}>
+            <StyledNavLink to={`/goit-react-hw-05-movie/movies/${movie.id}`}>
               {movie.name || movie.title}
             </StyledNavLink>
           </li>
