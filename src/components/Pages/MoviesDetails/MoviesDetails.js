@@ -31,7 +31,7 @@ const MoviesDetails = () => {
       }
     };
     getMovieDetails(movieId);
-  }, [movieId]);
+  }, [movieId, movieDetails]);
 
   return (
     <MovieDetailsMainContainer>
