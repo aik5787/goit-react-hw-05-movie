@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { fetchMovieRequest } from '../../Api/Api';
 import {
   MoviesContainer,
@@ -14,6 +14,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movieRequest, setMovieRequest] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
     if (searchParams.get('query')) {
@@ -24,9 +25,8 @@ const Movies = () => {
 
   const handleChange = e => {
     const inputValue = e.target.value;
-    if (inputValue.trim()) {
-      setSearchText(inputValue);
-    }
+
+    setSearchText(inputValue);
   };
 
   const getMovieRequest = async query => {
@@ -69,7 +69,10 @@ const Movies = () => {
         <MoviePageList>
           {movieRequest.map(movie => (
             <li key={movie.id}>
-              <StyledNavLink to={`/goit-react-hw-05-movie/movies/${movie.id}`}>
+              <StyledNavLink
+                to={`/goit-react-hw-05-movie/movies/${movie.id}`}
+                state={{ from: location }}
+              >
                 {movie.name || movie.title}
               </StyledNavLink>
             </li>

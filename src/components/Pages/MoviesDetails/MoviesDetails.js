@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../Api/Api';
 
 import {
@@ -19,7 +19,8 @@ import {
 const MoviesDetails = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
-
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? /goit-react-hw-05-movie/);
   useEffect(() => {
     const getMovieDetails = async movieId => {
       try {
@@ -37,7 +38,7 @@ const MoviesDetails = () => {
 
   return (
     <MovieDetailsMainContainer>
-      <StyledLink to="/goit-react-hw-05-movie/">Go Back</StyledLink>
+      <StyledLink to={backLink.current}>Go Back</StyledLink>
       {Object.keys(movieDetails).length > 0 ? (
         <MovieDetailsContainer>
           <MovieDetailsImg

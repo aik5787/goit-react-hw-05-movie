@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { fetchTrendingMovies } from '../../Api/Api';
 import {
   ListContainer,
@@ -9,6 +10,7 @@ import {
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     const getTrendingMovies = async () => {
@@ -30,7 +32,10 @@ const HomePage = () => {
       <HomePageList>
         {movies.map(movie => (
           <li key={movie.id}>
-            <StyledNavLink to={`/goit-react-hw-05-movie/movies/${movie.id}`}>
+            <StyledNavLink
+              to={`/goit-react-hw-05-movie/movies/${movie.id}`}
+              state={{ from: location }}
+            >
               {movie.name || movie.title}
             </StyledNavLink>
           </li>
