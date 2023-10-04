@@ -15,13 +15,14 @@ const HomePage = () => {
       try {
         const data = await fetchTrendingMovies();
         setMovies(data.results);
-        console.log(data.results);
       } catch (error) {
         console.error('Error fetching trending movies:', error);
       }
     };
     getTrendingMovies();
   }, []);
+
+  // console.log(movies);
 
   return (
     <ListContainer>

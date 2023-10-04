@@ -25,13 +25,14 @@ const MoviesDetails = () => {
       try {
         const dataMovieDetail = await fetchMovieDetails(movieId);
         setMovieDetails(dataMovieDetail);
-        console.log(movieDetails);
       } catch (error) {
         console.error('Error fetching movie details:', error);
       }
     };
     getMovieDetails(movieId);
-  }, [movieId, movieDetails]);
+  }, [movieId]);
+
+  // console.log(movieDetails);
 
   return (
     <MovieDetailsMainContainer>
@@ -65,8 +66,12 @@ const MoviesDetails = () => {
       )}
       <MovieAddInfoContainer>
         <MovieAddInfo>Additional information</MovieAddInfo>
-        <StyledNavLink to={`/movies/${movieId}/cast`}>Cast</StyledNavLink>
-        <StyledNavLink to={`/movies/${movieId}/reviews`}>Reviews</StyledNavLink>
+        <StyledNavLink to={`/goit-react-hw-05-movie/movies/${movieId}/cast`}>
+          Cast
+        </StyledNavLink>
+        <StyledNavLink to={`/goit-react-hw-05-movie/movies/${movieId}/reviews`}>
+          Reviews
+        </StyledNavLink>
       </MovieAddInfoContainer>
       <Outlet />
     </MovieDetailsMainContainer>
